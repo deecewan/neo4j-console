@@ -2,7 +2,8 @@ const db = require('db')({
     username: "neo4j",
     password: "admin"
 });
-const express = require('express');
+const express = require('express'),
+    path = require('path');
 
 var app = express(),
     server = app.listen(3000, "0.0.0.0", function() {
@@ -10,7 +11,7 @@ var app = express(),
     });
 
 app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 app.get('/statement/:statement', function(req, res, next) { // TODO: Send this information back to the index.html file, so the user can execute another statement.
