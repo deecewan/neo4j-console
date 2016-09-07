@@ -1,25 +1,23 @@
 const db = require('db')({
-    username: "neo4j",
-    password: "admin"
-});
-const express = require('express'),
-    path = require('path');
-
-var app = express(),
-    server = app.listen(3000, "0.0.0.0", function() {
-        console.log('Listening on *:3000');
+        username: "neo4j",
+        password: "admin"
+    }),
+    readline = require('readline').createInterface({
+        input: process.stdin,
+        output: process.stdout
     });
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
-});
+readline.prompt();
 
-app.get('/statement/:statement', function(req, res, next) { // TODO: Send this information back to the index.html file, so the user can execute another statement.
-    db.runStatement(decodeURIComponent(req.params.statement), {}, function(result) {
-        res.send(`<pre>${JSON.stringify(result.records, null, 4).split("\\\"").join("")}</pre>`);
-        next();
+readline.on('line', (line) => {
+    db.runStatement(line.trim(), {}, function(result) {
+        console.log(`${JSON.stringify(result.records, null, 4).split("\\\"").join("")}`);
+        readline.prompt();
     }, function(err) {
-        next(`Got an error trying to run the statement:\n${err}`);
-        res.send(`<pre>${JSON.stringify(err, null, 4).split("\\\"").join("")}</pre>`);
+        console.log(`Got an error trying to run the statement:\n${err}`);
+        readline.prompt();
     });
+}).on('close', () => {
+    console.log("Exiting Neo4j Browser...");
+    process.exit(0);
 });
