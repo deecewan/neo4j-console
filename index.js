@@ -5,7 +5,7 @@ const express = require('express'),
 
 var app = express(),
    server = app.listen(config.app.port, function() {
-       console.log('Listening on *:' + config.app.port);
+      console.log('Listening on *:' + config.app.port);
    });
 
 app.get('/', function(req, res) {
