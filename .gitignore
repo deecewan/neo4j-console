@@ -23,6 +23,7 @@ node_modules
 
 ### Linux ###
 .*
+!.editorconfig
 !.git*
 !.npmignore
 !.travis.yml
