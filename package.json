@@ -12,7 +12,7 @@
     "javascript"
   ],
   "author": "Itai Steinherz",
-  "license": "ISC",
+  "license": "Apache 2.0",
   "dependencies": {
     "db": "1.0.0",
     "express": "^4.10.2",
