@@ -1,11 +1,13 @@
 const config = require('config');
 const db = require('db')(config.db);
+const open = require('open');
 const express = require('express'),
 	path = require('path');
 
 var app = express(),
 	server = app.listen(config.app.port, function() {
 		console.log('Listening on *:' + config.app.port);
+		open('http://127.0.0.1:' + config.app.port);
 	});
 
 app.get('/', function(req, res) {
