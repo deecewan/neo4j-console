@@ -4,9 +4,9 @@ const express = require('express'),
 	path = require('path');
 
 var app = express(),
-   server = app.listen(config.app.port, function() {
-      console.log('Listening on *:' + config.app.port);
-   });
+	server = app.listen(config.app.port, function() {
+		console.log('Listening on *:' + config.app.port);
+	});
 
 app.get('/', function(req, res) {
 	res.sendFile(path.join(__dirname, 'public/index.html'));
