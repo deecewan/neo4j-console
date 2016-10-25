@@ -1,13 +1,13 @@
 
-const config = require("config");
-console.log(config);
+const config = require('config');
+
 const db = require('db')(config.db);
 const express = require('express'),
     path = require('path');
 
 var app = express(),
-    server = app.listen(config.app.port, config.app.host, function() {
-        console.log('Listening on ' + config.app.host + ':' + config.app.port);
+    server = app.listen(config.app.port, function() {
+        console.log('Listening on *:' + config.app.port);
     });
 
 app.get('/', function(req, res) {
