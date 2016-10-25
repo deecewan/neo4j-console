@@ -4,7 +4,6 @@ const express = require('express'),
 	path = require('path');
 
 var app = express(),
-
     server = app.listen(config.app.port, function() {
         console.log('Listening on *:' + config.app.port);
     });
