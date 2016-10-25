@@ -1,11 +1,8 @@
 ### Project-specific files ###
 
-neo4j/
 !node_modules/db/*
 
 ### Environment-specific files ###
-
-# Created by http://gitignore.io
 
 ### Node ###
 lib-cov
@@ -30,3 +27,5 @@ node_modules
 !.npmignore
 !.travis.yml
 *~
+
+# Created by http://gitignore.io
