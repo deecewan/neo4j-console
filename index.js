@@ -1,13 +1,13 @@
-const db = require('db')({
-    username: "neo4j",
-    password: "admin"
-});
+
+const config = require("config");
+console.log(config);
+const db = require('db')(config.db);
 const express = require('express'),
     path = require('path');
 
 var app = express(),
-    server = app.listen(3000, "0.0.0.0", function() {
-        console.log('Listening on *:3000');
+    server = app.listen(config.app.port, config.app.host, function() {
+        console.log('Listening on ' + config.app.host + ':' + config.app.port);
     });
 
 app.get('/', function(req, res) {
