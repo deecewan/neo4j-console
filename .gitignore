@@ -1,43 +1,32 @@
-.DS_Store
+### Project-specific files ###
+
 neo4j/
-node_modules/*
-!node_modules/db/
+!node_modules/db/*
 
-# Xcode
-.xcuserdata/*
-xcuserdata/
-xcuserdata
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-*.xccheckout
-*.moved-aside
-DerivedData
-*.hmap
-*.ipa
-*.xcuserstate
+### Environment-specific files ###
 
-# Logs #
-######################
+# Created by http://gitignore.io
+
+### Node ###
+lib-cov
+*.seed
 *.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
 
-# OS generated files #
-.DS_Store?
-ehthumbs.db
-Thumbs.db
+pids
+logs
+results
 
-## Build generated
-DerivedData/
+npm-debug.log
+node_modules
 
-## Obj-C/Swift specific
-*.dSYM.zip
-*.dSYM
-
-## Playgrounds
-timeline.xctimeline
-playground.xcworkspace
+### Linux ###
+.*
+!.git*
+!.npmignore
+!.travis.yml
+*~
