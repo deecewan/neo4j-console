@@ -1,5 +1,5 @@
 {
-  "name": "neo4j-browser",
+  "name": "neo4j-console",
   "version": "1.0.0",
   "description": "A small app for interacting with neo4j in the browser console",
   "main": "index.js",
@@ -15,8 +15,8 @@
   "author": "Itai Steinherz",
   "license": "Apache-2.0",
   "dependencies": {
-    "config": "^1.21.0",
     "db": "1.0.0",
-    "express": "^4.10.2"
+    "express": "^4.10.2",
+    "config": "^1.21.0"
   }
 }
