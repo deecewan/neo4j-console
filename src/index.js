@@ -1,3 +1,5 @@
+// Web interface
+
 const config = require('config'),
     db = require('./db')(config.database),
     express = require('express'),
@@ -6,6 +8,7 @@ const config = require('config'),
 var app = express(),
     server = app.listen(config.app.port, function() {
         console.log('Listening on *:' + config.app.port);
+        readline.prompt();
     });
 
 app.use(express.static(path.join(__dirname, "/../", config.app.publicDirectory)));
@@ -16,4 +19,24 @@ app.get('/statement/:statement', function(req, res) {
     }, function(err) {
         res.send(`<p>Got an error trying to run the statement:</p><pre>${JSON.stringify(err, null, 4).replace(/\\"/, '')}</pre>`);
     });
+});
+
+// Command Line interface
+
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+readline.on('line', (line) => {
+    db.runStatement(line.trim(), {}, function(result) {
+        console.log(JSON.stringify(result.records, null, 4).replace(/\\"/, ''));
+        readline.prompt();
+    }, function(err) {
+        console.log(`Got an error trying to run the statement:\n${JSON.stringify(err, null, 4).replace(/\\"/, '')}`);
+        readline.prompt();
+    });
+}).on('close', () => {
+    console.log("Exiting Neo4j Console...");
+    process.exit(0);
 });

@@ -195,7 +195,7 @@ Both issue lists are sorted by total number of comments. While not perfect, numb
 
 ### Git Commit Messages
 
-* Use the past tense ("Added feature" not "Add feature")
+* Use the present tense ("Add feature" not "Added feature")
 * Limit the first line to 50 characters or less
 * Reference issues and pull requests liberally
 * Consider starting the commit message with an applicable emoji:
