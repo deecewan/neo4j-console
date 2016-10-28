@@ -1,11 +1,20 @@
 {
   "name": "neo4j-console",
-  "version": "1.0.0",
-  "description": "A small app for interacting with neo4j in the browser console",
+  "version": "0.1.0",
+  "description": "A web and command line interface for the Neo4j Graph Database",
   "main": "src/index.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "neo4j-driver": "^1.0.2"
+  },
+  "devDependencies": {},
   "scripts": {
     "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itaisteinherz/neo4j-console.git"
   },
   "keywords": [
     "neo4j",
@@ -14,9 +23,8 @@
   ],
   "author": "Itai Steinherz",
   "license": "Apache-2.0",
-  "dependencies": {
-    "db": "1.0.0",
-    "express": "^4.10.2",
-    "config": "^1.21.0"
-  }
+  "bugs": {
+    "url": "https://github.com/itaisteinherz/neo4j-console/issues"
+  },
+  "homepage": "https://github.com/itaisteinherz/neo4j-console#readme"
 }
