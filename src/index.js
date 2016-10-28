@@ -1,6 +1,6 @@
-const config = require('config');
-const db = require('./db')(config.db);
-const express = require('express'),
+const config = require('config'),
+    db = require('./db')(config.db),
+    express = require('express'),
     path = require('path');
 
 var app = express(),
@@ -8,16 +8,12 @@ var app = express(),
         console.log('Listening on *:' + config.app.port);
     });
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
-});
+app.use(express.static(path.join(__dirname, "/../", config.app.publicDirectory)));
 
-app.get('/statement/:statement', function(req, res, next) { // TODO: Send this information back to the index.html file, so the user can execute another statement.
+app.get('/statement/:statement', function(req, res) {
     db.runStatement(decodeURIComponent(req.params.statement), {}, function(result) {
-        res.send(`<pre>${JSON.stringify(result.records, null, 4).split("\\\"").join("")}</pre>`);
-        next();
+        res.send(`<pre>${JSON.stringify(result.records, null, 4).replace(/\\"/, '')}</pre>`);
     }, function(err) {
-        next(`Got an error trying to run the statement:\n${err}`);
-        res.send(`<pre>${JSON.stringify(err, null, 4).split("\\\"").join("")}</pre>`);
+        res.send(`<p>Got an error trying to run the statement:</p><pre>${JSON.stringify(err, null, 4).replace(/\\"/, '')}</pre>`);
     });
 });

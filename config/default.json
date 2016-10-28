@@ -1,9 +1,10 @@
 {
-	"app":{
-		"port": 3000
-	},
-	"db":{
-		"username": "neo4j",
-		"password": "admin"
-	}
+    "app": {
+        "publicDirectory": "public",
+        "port": 3000
+    },
+    "db": {
+        "username": "neo4j",
+        "password": "admin"
+    }
 }
