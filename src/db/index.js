@@ -7,29 +7,30 @@ module.exports = DB;
 
 // DB constructor function
 
-function DB(credentials) {
-	if (!(this instanceof DB)) {
-		return new DB(credentials);
-	}
+function DB(options) {
+    if (!(this instanceof DB)) {
+        return new DB(options);
+    }
 
-	this.username = credentials.username;
-	this.password = credentials.password;
-	driver = neo4j.driver("bolt://localhost", neo4j.auth.basic(this.username, this.password));
+    this.username = options.username;
+    this.password = options.password;
+    this.url = options.url;
+    driver = neo4j.driver(this.url, neo4j.auth.basic(this.username, this.password));
 }
 
 DB.prototype.closeDriver = function() {
-	driver.close();
+    driver.close();
 }
 
 // Exports functions
 
 DB.prototype.runStatement = function(statement, params, resolve, reject) {
-	var result;
-	var session = driver.session();
-	session
-		.run(statement, params)
-		.then(function(result) {
-			session.close();
-			resolve(result);
-		}).catch(reject);
+    var result;
+    var session = driver.session();
+    session
+        .run(statement, params)
+        .then(function(result) {
+            session.close();
+            resolve(result);
+        }).catch(reject);
 }

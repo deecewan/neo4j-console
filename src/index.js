@@ -1,5 +1,5 @@
 const config = require('config'),
-    db = require('./db')(config.db),
+    db = require('./db')(config.database),
     express = require('express'),
     path = require('path');
 
