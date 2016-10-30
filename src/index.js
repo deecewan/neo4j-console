@@ -1,7 +1,7 @@
 // Web interface
 
 const config = require('config'),
-    db = require('./db')(config.database),
+    db = require('./db/index.js')(config.database),
     express = require('express'),
     path = require('path');
 
