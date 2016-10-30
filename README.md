@@ -31,8 +31,7 @@ Then, go to [http://localhost:3000][localhost] (or any other port specified in
 the config/default.json file).
 
 ## License
-
-  [Apache-2.0](LICENSE)
+[Apache-2.0](LICENSE)
 
 [neo4j]: [https://neo4j.com/download/]
 [localhost]: [http://localhost:3000]
