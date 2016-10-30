@@ -1,6 +1,5 @@
 {
     "app": {
-        "publicDirectory": "public",
         "port": 3000
     },
     "database": {

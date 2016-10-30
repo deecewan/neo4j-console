@@ -11,7 +11,7 @@ var app = express(),
         readline.prompt();
     });
 
-app.use(express.static(path.join(__dirname, "/../", config.app.publicDirectory)));
+app.use(express.static(path.join(__dirname, "/../", "public")));
 
 app.get('/statement/:statement', function(req, res) {
     db.runStatement(decodeURIComponent(req.params.statement), {}, function(result) {
