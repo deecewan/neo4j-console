@@ -14,10 +14,10 @@ var app = express(),
 app.use(express.static(path.join(__dirname, "/../", "public")));
 
 app.get('/statement/:statement', function(req, res) {
-    db.runStatement(decodeURIComponent(req.params.statement), {}, function(result) {
-        res.send(`<pre>${JSON.stringify(result.records, null, 4).replace(/\\"/, '')}</pre>`);
+    runStatement(decodeURIComponent(req.params.statement), function(result) {
+        res.send(`<pre>${result}</pre>`);
     }, function(err) {
-        res.send(`<p>Got an error trying to run the statement:</p><pre>${JSON.stringify(err, null, 4).replace(/\\"/, '')}</pre>`);
+        res.send(`<p>Got an error trying to run the statement:</p><pre>${err}</pre>`);
     });
 });
 
@@ -29,14 +29,24 @@ const readline = require('readline').createInterface({
 });
 
 readline.on('line', (line) => {
-    db.runStatement(line.trim(), {}, function(result) {
-        console.log(JSON.stringify(result.records, null, 4).replace(/\\"/, ''));
+    runStatement(line.trim(), function(result) {
+        console.log(result);
         readline.prompt();
     }, function(err) {
-        console.log(`Got an error trying to run the statement:\n${JSON.stringify(err, null, 4).replace(/\\"/, '')}`);
+        console.log(err);
         readline.prompt();
     });
 }).on('close', () => {
     console.log("Exiting Neo4j Console...");
     process.exit(0);
 });
+
+// General functions
+
+function runStatement(statement, resolve, reject) {
+    db.runStatement(statement, {}, function(result) {
+        resolve(JSON.stringify(result.records, null, 4).replace(/\\"/, ''));
+    }, function(err) {
+        reject(JSON.stringify(err, null, 4).replace(/\\"/, ''));
+    });
+}
