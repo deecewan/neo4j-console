@@ -30,8 +30,8 @@ npm start
 Then, go to [http://localhost:3000](http://localhost:3000) (or any other port
 specified in the config/default.json file).
 
-## Notes
-This project adheres to the Semantic Versioning 
-
 ## License
 [MIT License](LICENSE)
+
+## Notes
+This project adheres to the [Semantic Versioning](http://semver.org/).
