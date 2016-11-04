@@ -23,7 +23,7 @@
     "javascript"
   ],
   "author": "Itai Steinherz",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/itaisteinherz/neo4j-console/issues"
   },
