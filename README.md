@@ -2,11 +2,11 @@
 A web and command line interface for the Neo4j Graph Database.
 
 ## Quick Start
-Download and install Neo4j, which can be found [here](https://neo4j.com/download/). Then, start the
-database.
+Download and install Neo4j, which can be found [here](https://neo4j.com/download/).
+Then, start the database.
 
 Configure the `config/default.json` file with the desired port for the webserver
-to run on, and the username, password and url to your database.
+to run on and the username, password and url to your database.
 
 Clone the repository:
 
@@ -27,8 +27,11 @@ Start the server:
 npm start
 ```
 
-Then, go to [http://localhost:3000](http://localhost:3000) (or any other port specified in
-the config/default.json file).
+Then, go to [http://localhost:3000](http://localhost:3000) (or any other port
+specified in the config/default.json file).
+
+## Notes
+This project adheres to the Semantic Versioning 
 
 ## License
-[Apache-2.0](LICENSE)
+[MIT License](LICENSE)
