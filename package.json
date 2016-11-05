@@ -1,6 +1,6 @@
 {
   "name": "neo4j-console",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A web and command line interface for the Neo4j Graph Database",
   "main": "src/index.js",
   "dependencies": {
