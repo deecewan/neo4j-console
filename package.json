@@ -8,9 +8,12 @@
     "neo4j-driver": "^1.0.2",
     "config": "^1.21.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^3.9.1"
+  },
   "scripts": {
     "start": "node src/index.js",
+    "lint": "./node_modules/.bin/eslint 'src/.' --ext '.js'; exit 0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
