@@ -1,7 +1,7 @@
 # Contributing
 
 Thanks for checking out Neo4j Console. Use the following instructions to
-contribute to Neo4j Console.
+contribute to the project.
 
 Fork, then clone the repo:
 
