@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "6"
+  - "5"
+  - "4"
+before_script:
+  - npm run test:start; sleep 0.3
+after_script:
+  - npm run test:stop; npm run test:clean-logs
