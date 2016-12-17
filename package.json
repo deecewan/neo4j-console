@@ -9,12 +9,13 @@
     "config": "^1.21.0"
   },
   "devDependencies": {
-    "eslint": "^3.9.1"
+    "eslint": "^3.9.1",
+    "mocha": "^3.2.0"
   },
   "scripts": {
     "start": "node src/index.js",
-    "lint": "./node_modules/.bin/eslint 'src/.' --ext '.js'; exit 0",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "./node_modules/.bin/eslint 'src/.' --ext '.js'",
+    "test": "npm run lint; ./node_modules/mocha/bin/mocha --harmony"
   },
   "repository": {
     "type": "git",
