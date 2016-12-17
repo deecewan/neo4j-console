@@ -1,9 +1,36 @@
 language: node_js
+
 node_js:
   - "6"
-  - "5"
-  - "4"
+
+jdk:
+  - openjdk8
+
+env:
+  - NEO4J_VERSION="3.1.0"
+
+sudo: required
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+      - oracle-java8-set-default
+  
+before_install:
+  - sudo add-apt-repository ppa:openjdk-r/ppa -y
+  - sudo apt-get update
+  - sudo apt-get install openjdk-8-jdk
+  - sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
+  - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+  - export JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+  - export PATH=$PATH:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/lib/jvm/java-8-openjdk-amd64/jre/bin
+  - wget dist.neo4j.org/neo4j-community-$NEO4J_VERSION-unix.tar.gz
+  - tar -xzf neo4j-community-$NEO4J_VERSION-unix.tar.gz
+  - java -version
+  - neo4j-community-$NEO4J_VERSION/bin/neo4j start
+  
 before_script:
   - npm run test:start; sleep 0.3
+
 after_script:
   - npm run test:stop; npm run test:clean-logs
