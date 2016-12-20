@@ -1,4 +1,4 @@
-var neo4j = require('neo4j-driver').v1;
+var neo4j = require("neo4j-driver").v1;
 var driver;
 
 // Module exports
@@ -20,17 +20,19 @@ function DB(options) {
 
 DB.prototype.closeDriver = function() {
     driver.close();
-}
+};
 
 // Exports functions
 
-DB.prototype.runStatement = function(statement, params, resolve, reject) {
-    var result;
+DB.prototype.runStatement = function(statement, params) {
     var session = driver.session();
-    session
-        .run(statement, params)
-        .then(function(result) {
-            session.close();
-            resolve(result);
-        }).catch(reject);
-}
+
+    return new Promise(function(resolve, reject) {
+        session
+            .run(statement, params)
+            .then(function(result) {
+                session.close();
+                resolve(result);
+            }).catch(reject);
+    });
+};

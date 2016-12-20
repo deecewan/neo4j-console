@@ -1,52 +1,64 @@
 // Web interface
 
-const config = require('config'),
-    db = require('./db/index.js')(config.database),
-    express = require('express'),
-    path = require('path');
+const config = require("../config/default.json"),
+    db = require("./db/index.js")(config.database),
+    express = require("express"),
+    path = require("path");
 
-var app = express(),
-    server = app.listen(config.app.port, function() {
-        console.log('Listening on *:' + config.app.port);
-        readline.prompt();
-    });
+var app = express();
 
-app.use(express.static(path.join(__dirname, "/../", "public")));
+app.listen(config.app.port, function() {
+    console.log("Listening on *:" + config.app.port);
+    readline.prompt();
+});
 
-app.get('/statement/:statement', function(req, res) {
-    runStatement(decodeURIComponent(req.params.statement), function(result) {
-        res.send(`<pre>${result}</pre>`);
-    }, function(err) {
-        res.send(`<p>Got an error trying to run the statement:</p><pre>${err}</pre>`);
-    });
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get(/(js|css|fonts)/, express.static(path.join(__dirname, "../node_modules/bootstrap/dist")));
+
+app.get("/statement/:statement", function(req, res) {
+    res.set("Access-Control-Allow-Origin", "*");
+
+    const statement = decodeURIComponent(req.params.statement),
+        params = {};
+
+    db.runStatement(statement, params)
+        .then(function(result) {
+            res.status(200).send({
+                result: result
+            });
+        })
+        .catch(function(err) {
+            res.status(500).send({
+                err: err
+            });
+        });
 });
 
 // Command Line interface
 
-const readline = require('readline').createInterface({
+const readline = require("readline").createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-readline.on('line', (line) => {
-    runStatement(line.trim(), function(result) {
-        console.log(result);
-        readline.prompt();
-    }, function(err) {
-        console.log(err);
-        readline.prompt();
-    });
-}).on('close', () => {
-    console.log("Exiting Neo4j Console...");
-    process.exit(0);
-});
+readline
+    .on("line", function(line) {
+        const statement = line.trim(),
+            params = {};
 
-// General functions
-
-function runStatement(statement, resolve, reject) {
-    db.runStatement(statement, {}, function(result) {
-        resolve(JSON.stringify(result.records, null, 4).replace(/\\"/, ''));
-    }, function(err) {
-        reject(JSON.stringify(err, null, 4).replace(/\\"/, ''));
+        db.runStatement(statement, params)
+            .then(function(result) {
+                console.log(result);
+                readline.prompt();
+            })
+            .catch(function(err) {
+                console.log(err);
+                readline.prompt();
+            });
+    })
+    .on("close", () => {
+        console.log("Exiting Neo4j Console...");
+        db.closeDriver();
+        process.exit(0);
     });
-}
