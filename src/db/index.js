@@ -36,3 +36,9 @@ DB.prototype.runStatement = function(statement, params) {
             }).catch(reject);
     });
 };
+
+DB.prototype.recreateDriver = function(password) {
+    this.password = password;
+
+    driver = neo4j.driver(this.url, neo4j.auth.basic(this.username, this.password));
+};

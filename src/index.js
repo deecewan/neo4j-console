@@ -16,6 +16,21 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get(/(js|css|fonts)/, express.static(path.join(__dirname, "../node_modules/bootstrap/dist")));
 
+app.get("/restart/:password", function(req, res) {
+    const password = decodeURIComponent(req.params.password);
+    const statement = `CALL dbms.changePassword('${password}')`,
+        params = {};
+
+    db.runStatement(statement, params)
+        .then(function() {
+            db.recreateDriver(password);
+            res.status(200).end();
+        })
+        .catch(function() {
+            res.status(500).end();
+        });
+});
+
 app.get("/statement/:statement", function(req, res) {
     res.set("Access-Control-Allow-Origin", "*");
 
