@@ -7,7 +7,7 @@ jdk:
   - openjdk8
 
 env:
-  - NEO4J_VERSION="3.1.0"
+  - NEO4J_VERSION="3.0.3"
 
 sudo: required
 addons:
