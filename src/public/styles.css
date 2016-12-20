@@ -1,0 +1,12 @@
+.input-group {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+pre.red-result {
+    background-color: rgba(200, 100, 100, 0.8);
+}
+
+pre.green-result {
+    background-color: rgba(100, 200, 100, 0.8);
+}
