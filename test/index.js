@@ -10,6 +10,7 @@ describe("Neo4j Console", function() { // TODO: Add tests for all of the feature
         it("should run the given statement and return the result", function() {
             return new Promise(function(resolve, reject) {
                 const testURL = `http://localhost:3000/statement/${encodeURIComponent("CREATE (n:TestNode {name: \"test\"}) WITH n.name AS name, n as TestNode DELETE TestNode RETURN name")}`;
+                console.log(`test URL: ${testURL}`);
 
                 http.get(testURL, (res) => {
                     const statusCode = res.statusCode;
@@ -22,6 +23,8 @@ describe("Neo4j Console", function() { // TODO: Add tests for all of the feature
                     });
                     res.on("end", function() {
                         try {
+                            console.log(`Raw data recieved is:\n${rawData}`);
+
                             assert.equal(rawData.toString(), testOutput);
                             resolve();
                         } catch (e) {
@@ -29,6 +32,7 @@ describe("Neo4j Console", function() { // TODO: Add tests for all of the feature
                         }
                     });
                 }).on("error", (e) => {
+                    console.error(`Error: ${e.message}.\n\n${e}`);
                     reject(e);
                 });
             });
