@@ -15,11 +15,11 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "lint": "./node_modules/.bin/eslint 'src/.' --ext '.js'",
-    "test": "npm run lint; ./node_modules/mocha/bin/mocha --harmony",
-    "test:start": "./node_modules/.bin/forever start src/index.js",
-    "test:stop": "./node_modules/.bin/forever stop src/index.js",
-    "test:clean-logs": "./node_modules/.bin/forever cleanlogs"
+    "lint": "eslint ./src --ext .js",
+    "test": "npm run lint; mocha --harmony",
+    "test:start": "forever start src/index.js",
+    "test:stop": "forever stop src/index.js",
+    "test:clean-logs": "forever cleanlogs"
   },
   "repository": {
     "type": "git",
